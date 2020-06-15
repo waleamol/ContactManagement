@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta name="description" content="">
+<meta name="author" content="">
+<title>Dashboard</title>
+<link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet"
+	type="text/css">
+<link
+	href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+	rel="stylesheet">
+<link href="css/sb-admin-2.min.css" rel="stylesheet">
+<link href="vendor/datatables/dataTables.bootstrap4.min.css"
+	rel="stylesheet">
+<link rel="stylesheet" href="css/toastr.min.css">
+</head>
+<body id="page-top">
+	<div id="wrapper">
+		<ul
+			class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
+			id="accordionSidebar">
+			<a
+				class="sidebar-brand d-flex align-items-center justify-content-center"
+				href="index.html">
+				<div class="sidebar-brand-text mx-3">Dashboard</div>
+			</a>
+			<hr class="sidebar-divider my-0">
+			<li class="nav-item"><a class="nav-link" href="contact.html">
+					<i class="fas fa-fw fa-tachometer-alt"></i> <span>Contact
+						Details</span>
+			</a></li>
+			<hr class="sidebar-divider d-none d-md-block">
+			<div class="text-center d-none d-md-inline">
+				<button class="rounded-circle border-0" id="sidebarToggle"></button>
+			</div>
+		</ul>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div id="content">
+				<nav
+					class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+					<button id="sidebarToggleTop"
+						class="btn btn-link d-md-none rounded-circle mr-3">
+						<i class="fa fa-bars"></i>
+					</button>
+					<ul class="navbar-nav ml-auto">
+						<li class="nav-item dropdown no-arrow d-sm-none"><a
+							class="nav-link dropdown-toggle" href="#" id="searchDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <i class="fas fa-search fa-fw"></i>
+						</a>
+							<div
+								class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+								aria-labelledby="searchDropdown">
+								<form class="form-inline mr-auto w-100 navbar-search">
+									<div class="input-group">
+										<input type="text"
+											class="form-control bg-light border-0 small"
+											placeholder="Search for..." aria-label="Search"
+											aria-describedby="basic-addon2">
+										<div class="input-group-append">
+											<button class="btn btn-primary" type="button">
+												<i class="fas fa-search fa-sm"></i>
+											</button>
+										</div>
+									</div>
+								</form></li>
+						<li class="nav-item dropdown no-arrow"><a
+							class="nav-link dropdown-toggle" href="#" id="userDropdown"
+							role="button" data-toggle="dropdown" aria-haspopup="true"
+							aria-expanded="false"> <span
+								class="mr-2 d-none d-lg-inline text-gray-600 small">admin</span>
+								<img class="img-profile rounded-circle" src="img/profile.jpg">
+						</a>
+							<div
+								class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+								aria-labelledby="userDropdown">
+								<a class="dropdown-item" href="#" data-toggle="modal"
+									data-target="#logoutModal"> <i
+									class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+									Logout
+								</a>
+							</div></li>
+					</ul>
+				</nav>
+				<div class="container-fluid">
+					<div class="card shadow mb-4">
+						<div class="card-header py-3">
+							<div class="row float-right">
+								<a href="#" data-toggle="modal"
+									data-target="#addContactDetailsModal"
+									class="btn btn-primary btn-user btn-block "> Add Contact
+									Details </a>
+							</div>
+						</div>
+						<div class="card-body">
+							<div class="table-responsive">
+								<table class="table table-bordered" id="contactDetailsTable"
+									width="100%" cellspacing="0">
+									<thead>
+										<tr>
+											<th>First Name</th>
+											<th>Last Name</th>
+											<th>Phone No.</th>
+											<th>Date of Birth</th>
+											<th>Status</th>
+											<th>Manage</th>
+											<th>Created On</th>
+											<th>Updated On</th>
+										</tr>
+									</thead>
+									<tbody id="contactDetailsList">
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<footer class="sticky-footer bg-white">
+				<div class="container my-auto">
+					<div class="copyright text-center my-auto">
+						<span>Copyright &copy; Your Website 2020</span>
+					</div>
+				</div>
+			</footer>
+		</div>
+	</div>
+	<a class="scroll-to-top rounded" href="#page-top"> <i
+		class="fas fa-angle-up"></i>
+	</a>
+	<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">Select "Logout" below if you are ready
+					to end your current session.</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<a class="btn btn-primary" href="index.html">Logout</a>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="addContactDetailsModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #f8f9fc;">
+					<h5 class="modal-title" id="exampleModalLabel">Add Contact
+						Details</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="user">
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-address-card mr-2"></i>First
+									Name</strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text" class="form-control"
+										placeholder="Ex. Amol" id="firstName">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-address-card mr-2"></i>Last
+									Name </strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text" class="form-control"
+										placeholder="Ex. Wale" id="lastName">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-mobile mr-2"></i>Phone No </strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text"
+										class="form-control mobile-phone-number"
+										placeholder="Ex. John" id="phoneNumber">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-calendar mr-2"></i>Date of
+									Birth</strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input type="date" class="form-control"
+										placeholder="Select Date" id="dateofbirth">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<button class="btn btn-primary" onclick="AddContactDetails();">Add
+						Details</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="modal fade" id="editContactDetailsModal" tabindex="-1"
+		role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color: #f8f9fc;">
+					<h5 class="modal-title" id="exampleModalLabel">Edit Contact
+						Details</h5>
+					<button class="close" type="button" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">×</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					<form class="user">
+						<input value=" " type="hidden" id="eContactId">
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-address-card mr-2"></i>First
+									Name</strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text" class="form-control"
+										placeholder="Ex. Amol" id="efirstName">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-address-card mr-2"></i>Last
+									Name </strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text" class="form-control"
+										placeholder="Ex. Wale" id="elastName">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-mobile mr-2"></i>Phone No </strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input value=" " type="text"
+										class="form-control mobile-phone-number"
+										placeholder="Ex. John" id="ephoneNumber">
+								</div>
+							</div>
+						</div>
+						<div class="row clearfix m-2">
+							<div class="col-sm-4 col-lg-4 col-md-4">
+								<strong><i class="fas fa-calendar mr-2"></i>Date of
+									Birth</strong>
+							</div>
+							<div class="col-sm-8 col-lg-8 col-md-8">
+								<div class="input-group">
+									<input type="date" class="form-control"
+										placeholder="Select Date" id="edateofbirth">
+								</div>
+							</div>
+						</div>
+					</form>
+				</div>
+				<div class="modal-footer">
+					<button class="btn btn-secondary" type="button"
+						data-dismiss="modal">Cancel</button>
+					<button class="btn btn-primary" onclick="editContactDetails();">Update
+						Details</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script src="vendor/jquery/jquery.min.js"></script>
+	<script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+	<script src="vendor/datatables/jquery.dataTables.min.js"></script>
+	<script src="vendor/datatables/dataTables.bootstrap4.min.js"></script>
+	<script src="js/demo/datatables-demo.js"></script>
+	<script src="js/sb-admin-2.min.js"></script>
+	<script src="js/toastr.min.js"></script>
+	<script>
+		function handleErrorMessage(err, url) {
+			switch (err.status) {
+			case 400:
+				toastr.error('Error, Bad Request !!!');
+				break;
+			case 401:
+				toastr.error('Error, Unauthorised Request !!!');
+				setTimeout(function() {
+					window.location.href = url;
+				}, 1500);
+				break;
+			case 403:
+				toastr.error('Error, Forbidden Request !!!');
+				break;
+			default:
+				toastr.error('Error, Something went Wrong !!!');
+				break;
+			}
+		}
+		$(document).ready(function() {
+			$('#contactDetailsTable').DataTable();
+		});
+		toastr.options = {
+			"closeButton" : false,
+			"debug" : false,
+			"newestOnTop" : false,
+			"progressBar" : false,
+			"positionClass" : "toast-top-center",
+			"preventDuplicates" : false,
+			"onclick" : null,
+			"showDuration" : "30000",
+			"hideDuration" : "100000",
+			"timeOut" : "5000",
+			"extendedTimeOut" : "1000",
+			"showEasing" : "swing",
+			"hideEasing" : "linear",
+			"showMethod" : "fadeIn",
+			"hideMethod" : "fadeOut"
+		}
+
+		function AddContactDetails() {
+			var firstName = $("#firstName").val();
+			var lastName = $("#lastName").val();
+			var phoneNumber = $("#phoneNumber").val();
+			var dateofbirth = $("#dateofbirth").val();
+			var dataPost = {
+				firstName : firstName,
+				lastName : lastName,
+				phoneNumber : phoneNumber,
+				dateOfBirth : dateofbirth
+			};
+			var urlDetail = "../ContactDetailsService/contacts";
+			$.ajax({
+				type : 'POST',
+				url : urlDetail,
+				async : true,
+				data : JSON.stringify(dataPost),
+				dataType : 'json',
+				contentType : "application/json",
+				success : function(data) {
+					if (data != null) {
+						if (data.errorCode === 1) {
+							toastr.success("Added Successfully!!");
+							window.location.href = "contact.html";
+						} else {
+							toastr.error("Failed to Add!!");
+						}
+					} else {
+						toastr.error("Server Error!!");
+					}
+				},
+				error : function(err) {
+					handleErrorMessage(err, 'index.html');
+				}
+			});
+		}
+		ListContactDetails();
+		function ListContactDetails() {
+			var s = "../ContactDetailsService/contacts/";
+			$
+					.ajax({
+						type : 'GET',
+						url : s,
+						async : true,
+						dataType : 'json',
+						contentType : "application/json",
+						success : function(data) {
+							var str = JSON.stringify(data);
+							var jsonObj = JSON.parse(str);
+							if (jsonObj.length != 0) {
+								$('#contactDetailsList').html('');
+							}
+							for (var i = 0; i < jsonObj.length; i++) {
+								var dob = '';
+								if (jsonObj[i].dateOfBirth != null) {
+									dob = jsonObj[i].dateOfBirth.substring(0,
+											10);
+								}
+								var createdOn = '';
+								if (jsonObj[i].createdOn != null) {
+									createdOn = jsonObj[i].createdOn.substring(
+											0, 10);
+								}
+								var updatedOn = '';
+								if (jsonObj[i].updatedOn != null) {
+									updatedOn = jsonObj[i].updatedOn.substring(
+											0, 10);
+								}
+								var status = '';
+								if (jsonObj[i].status === 1) {
+									status = '<span class="badge badge-success">ACTIVE</span>';
+								} else if (jsonObj[i].status === -1) {
+									status = '<span class="badge badge-secondary">SUSPENDED</span>';
+								}
+								var record = '<tr>' + '<td>'
+										+ jsonObj[i].firstName
+										+ '</td>'
+										+ '<td>'
+										+ jsonObj[i].lastName
+										+ '</td>'
+										+ '<td>'
+										+ jsonObj[i].phoneNumber
+										+ '</td>'
+										+ '<td>'
+										+ dob
+										+ '</td>'
+										+ '<td>'
+										+ status
+										+ '</td>'
+										+ '<td>'
+										+ '<div class="dropdown"><button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">'
+										+ 'Manage</button><div class="dropdown-menu">'
+										+ '<a class="dropdown-item" onclick="updateStatus(\''
+										+ jsonObj[i].contactId
+										+ '\',1);">Mark Active?</a>'
+										+ '<a class="dropdown-item" onclick="updateStatus(\''
+										+ jsonObj[i].contactId
+										+ '\',-1);">Mark Suspended?</a>'
+										+ '<a class="dropdown-item" onclick="showEditDetails(\''
+										+ jsonObj[i].contactId
+										+ '\',\''
+										+ jsonObj[i].firstName
+										+ '\',\''
+										+ jsonObj[i].lastName
+										+ '\',\''
+										+ jsonObj[i].phoneNumber
+										+ '\',\''
+										+ dob
+										+ '\');">Edit Details</a>'
+										+ '<a class="dropdown-item" onclick="deleteContact(\''
+										+ jsonObj[i].contactId
+										+ '\');">Remove</a></div></div>'
+										+ '</td>' + '<td>' + createdOn
+										+ '</td>' + '<td>' + updatedOn
+										+ '</td>' + '</tr>';
+								$('#contactDetailsList').append(record);
+							}
+						},
+						error : function(err) {
+							handleErrorMessage(err, 'index.html');
+						}
+					});
+		}
+		function updateStatus(contactId, status) {
+			var s = "../ContactDetailsService/contacts/updatestatus/"
+					+ contactId + "/" + status;
+			$.ajax({
+				type : 'PATCH',
+				url : s,
+				async : true,
+				success : function(data) {
+					if (data != null) {
+						var str = JSON.stringify(data);
+						var jsonObj = JSON.parse(str);
+						if (jsonObj.errorCode === 1) {
+							toastr.success("Status Updated Successfully !!");
+							setTimeout(function() {
+								window.location.reload();
+							}, 300);
+						} else {
+							toastr.error("Failed to Update Status!!!");
+						}
+					} else {
+						toastr.error("Failed to Update Status!!!");
+					}
+				},
+				error : function(err) {
+					handleErrorMessage(err, 'index.html');
+				}
+			});
+		}
+
+		function deleteContact(contactId) {
+			var s = "../ContactDetailsService/contacts?contactId=" + contactId;
+			$.ajax({
+				type : 'DELETE',
+				url : s,
+				async : true,
+				success : function(data) {
+					if (data != null) {
+						var str = JSON.stringify(data);
+						var jsonObj = JSON.parse(str);
+						if (jsonObj.errorCode === 1) {
+							toastr.success("Contact Deleted Successfully !!");
+							setTimeout(function() {
+								window.location.reload();
+							}, 300);
+						} else {
+							toastr.error("Failed to Delete Contact!!!");
+						}
+					} else {
+						toastr.error("Failed to Delete Contact!!");
+					}
+				},
+				error : function(err) {
+					handleErrorMessage(err, 'index.html');
+				}
+			});
+		}
+
+		function showEditDetails(contactId, firstName, lastName, phoneNumber,
+				dob) {
+			$("#eContactId").val(contactId);
+			$("#efirstName").val(firstName);
+			$("#elastName").val(lastName);
+			$("#ephoneNumber").val(phoneNumber);
+			$("#edateofbirth").val(dob);
+			$("#editContactDetailsModal").modal('show');
+		}
+
+		function editContactDetails() {
+			var contactId = $("#eContactId").val();
+			var firstName = $("#efirstName").val();
+			var lastName = $("#elastName").val();
+			var phoneNumber = $("#ephoneNumber").val();
+			var dateofbirth = $("#edateofbirth").val();
+			var dataToPost = {
+				contactId : contactId,
+				firstName : firstName,
+				lastName : lastName,
+				phoneNumber : phoneNumber,
+				dateOfBirth : dateofbirth
+			};
+			var s = "../ContactDetailsService/contacts/update";
+			$.ajax({
+				type : 'POST',
+				url : s,
+				data : JSON.stringify(dataToPost),
+				dataType : 'json',
+				contentType : "application/json",
+				async : true,
+				success : function(data) {
+					if (data != null) {
+						var str = JSON.stringify(data);
+						var jsonObj = JSON.parse(str);
+						if (jsonObj.errorCode === 1) {
+							toastr.success("Status Updated Successfully !!");
+							setTimeout(function() {
+								window.location.reload();
+							}, 300);
+						} else {
+							toastr.error("Failed to Update Status!!!");
+						}
+					} else {
+						toastr.error("Failed to Update Status!!!");
+					}
+				},
+				error : function(err) {
+					handleErrorMessage(err, 'index.html');
+				}
+			});
+		}
+	</script>
+</body>
+</html>
